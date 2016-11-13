@@ -1,0 +1,21 @@
+{
+  "name": "TorrentBeam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "x-ray": "^2.3.1",
+    "x-ray-nightmare": "^0.1.2",
+    "x-ray-phantom": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.46"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
