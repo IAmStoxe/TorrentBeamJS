@@ -7,7 +7,6 @@
     "bluebird": "^3.4.6",
     "x-ray": "^2.3.1",
     "x-ray-nightmare": "^0.1.2",
-    "x-ray-phantom": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^6.0.46"
