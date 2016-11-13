@@ -6,9 +6,10 @@
   "dependencies": {
     "bluebird": "^3.4.6",
     "x-ray": "^2.3.1",
-    "x-ray-nightmare": "^0.1.2",
+    "x-ray-nightmare": "^0.1.2"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.0.35",
     "@types/node": "^6.0.46"
   },
   "scripts": {
