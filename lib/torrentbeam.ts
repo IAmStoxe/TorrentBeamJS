@@ -1,5 +1,7 @@
+// Types
+import {IProviderConfig, ISearchResultsSelectors} from "./typings";
+
 // Bluebird's Promise
-import {IProviderConfig, ISearchResultsSelectors} from "./typings/index";
 const bbPromise = require('bluebird');
 
 // Web driver(s)
