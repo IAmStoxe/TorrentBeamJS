@@ -1,4 +1,5 @@
 // Bluebird's Promise
+import {IProviderConfig, ISearchResultsSelectors} from "./typings/index";
 const bbPromise = require('bluebird');
 
 // Web driver(s)
@@ -82,19 +83,5 @@ export class TorrentBeam {
     }
 }
 
-export interface IProviderConfig {
-    name: string,
-    searchUrl: string,
-    testSearchUrl: string,
-    resultsCssSelectors: ISearchResultsSelectors
-}
-
-export interface ISearchResultsSelectors {
-    links: string,
-    titles: string,
-    added: string,
-    size: string,
-    seeds: string,
-}
 
 
