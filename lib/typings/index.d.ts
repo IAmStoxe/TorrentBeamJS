@@ -12,3 +12,7 @@ export interface ISearchResultsSelectors {
     size: string,
     seeds: string,
 }
+
+export interface INightmareSwitches {
+    switches: {}
+}

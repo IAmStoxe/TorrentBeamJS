@@ -1,5 +1,7 @@
 // Types
-import {IProviderConfig, ISearchResultsSelectors} from "./typings";
+import {IProviderConfig, ISearchResultsSelectors, INightmareSwitches} from "./typings";
+
+const debug = require('debug');
 
 // Bluebird's Promise
 const bbPromise = require('bluebird');
@@ -19,10 +21,12 @@ export class TorrentBeam {
 
     public siteConfig: IProviderConfig[];
     public providers: string[];
+    public nightmareSwitches: INightmareSwitches;
 
-    constructor() {
+    constructor(nightmareSwitches?: INightmareSwitches) {
         this.siteConfig = this.loadProviderConfig();
         this.providers = this.siteConfig.map(item => item.name);
+        this.nightmareSwitches = nightmareSwitches;
     }
 
     /**
@@ -51,7 +55,7 @@ export class TorrentBeam {
         return new bbPromise(
             (resolve, reject) => {
                 // Use nightmare to handle providers where JS is required.
-                let nightmareDriver = nightmare();
+                let nightmareDriver = nightmare(this.nightmareSwitches);
                 const x = Xray().driver(nightmareDriver);
                 // Use bbPromise.promisify to translate callbacks to promises.
                 let search = bbPromise.promisify(x(searchUrl, cssSelectors));
