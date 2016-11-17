@@ -38,6 +38,17 @@ As you can see this provides all the necessary information points as keys in the
 
 ### Performing Searches
 
+#### All Provider Search
+```javascript
+    const TorrentBeam = require('TorrentBeam').TorrentBeam;
+    let torrentBeam = new TorrentBeam();
+    let searchTerm = 'IAmSearchingForThis';
+    
+    torrentBeam.searchAll(searchTerm)
+        .then(resp => console.log(resp))
+        .catch(err => console.error(err));
+```
+
 #### Single Provider Search
 Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.
 ```javascript
