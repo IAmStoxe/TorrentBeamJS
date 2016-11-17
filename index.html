@@ -51,38 +51,65 @@
 
 <p>It works from a JSON file, namely search_config.json. Within this magical JSON file is an array of configuration objects for the individual providers. Here is the provided configuration of TorLock:</p>
 
-<pre><code>  {
-    "name": "TorLock",
-    "searchUrl": "https://www.torlock.com/all/torrents/%s.html",
-    "testSearchUrl": "https://www.torlock.com/all/torrents/batman.html",
-    "resultsCssSelectors": {
-      "links": [
-        ".panel-default .table-condensed td a@href"
-      ],
-      "titles": [
-        ".panel-default .table-condensed b"
-      ],
-      "added": [
-        ".panel-default .td"
-      ],
-      "sizes": [
-        ".panel-default .ts"
-      ],
-      "seeds": [
-        ".panel-default .tul"
-      ]
-    }
-  }
-</code></pre>
+<div class="highlight highlight-source-json"><pre>    {
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>TorLock<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>searchUrl<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>https://www.torlock.com/all/torrents/%s.html<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>testSearchUrl<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>https://www.torlock.com/all/torrents/batman.html<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>resultsCssSelectors<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>links<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>.panel-default .table-condensed td a@href<span class="pl-pds">"</span></span>
+          ],
+          <span class="pl-s"><span class="pl-pds">"</span>titles<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>.panel-default .table-condensed b<span class="pl-pds">"</span></span>
+          ],
+          <span class="pl-s"><span class="pl-pds">"</span>added<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>.panel-default .td<span class="pl-pds">"</span></span>
+          ],
+          <span class="pl-s"><span class="pl-pds">"</span>sizes<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>.panel-default .ts<span class="pl-pds">"</span></span>
+          ],
+          <span class="pl-s"><span class="pl-pds">"</span>seeds<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>.panel-default .tul<span class="pl-pds">"</span></span>
+          ]
+        }
+    }</pre></div>
 
 <p>As you can see this provides all the necessary information points as keys in the config, with their accompanying value of their CSS selector for that specific website. These should be pretty self explanatory.</p>
 
 <h3>
+<a id="performing-searches" class="anchor" href="#performing-searches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Performing Searches</h3>
+
+<p>Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.</p>
+
+<h4>
+<a id="all-provider-search" class="anchor" href="#all-provider-search" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>All Provider Search</h4>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">const</span> <span class="pl-c1">TorrentBeam</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>TorrentBeam<span class="pl-pds">'</span></span>).<span class="pl-smi">TorrentBeam</span>;
+    <span class="pl-k">let</span> torrentBeam <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">TorrentBeam</span>();
+    <span class="pl-k">let</span> searchTerm <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>IAmSearchingForThis<span class="pl-pds">'</span></span>;
+
+    <span class="pl-smi">torrentBeam</span>.<span class="pl-en">searchAll</span>(searchTerm)
+        .<span class="pl-en">then</span>(<span class="pl-smi">resp</span> <span class="pl-k">=&gt;</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(resp))
+        .<span class="pl-en">catch</span>(<span class="pl-smi">err</span> <span class="pl-k">=&gt;</span> <span class="pl-en">console</span>.<span class="pl-c1">error</span>(err));</pre></div>
+
+<h4>
+<a id="single-provider-search" class="anchor" href="#single-provider-search" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Single Provider Search</h4>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">const</span> <span class="pl-c1">TorrentBeam</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>TorrentBeam<span class="pl-pds">'</span></span>).<span class="pl-smi">TorrentBeam</span>;
+    <span class="pl-k">let</span> torrentBeam <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">TorrentBeam</span>();
+    <span class="pl-k">let</span> searchTerm <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>IAmSearchingForThis<span class="pl-pds">'</span></span>;
+    <span class="pl-k">let</span> provider <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>LimeTorrents<span class="pl-pds">'</span></span>;
+
+    <span class="pl-smi">torrentBeam</span>.<span class="pl-en">searchSingle</span>(provider,searchTerm)
+        .<span class="pl-en">then</span>(<span class="pl-smi">resp</span> <span class="pl-k">=&gt;</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(resp))
+        .<span class="pl-en">catch</span>(<span class="pl-smi">err</span> <span class="pl-k">=&gt;</span> <span class="pl-en">console</span>.<span class="pl-c1">error</span>(err));</pre></div>
+
+<h3>
 <a id="using-proxies--switches" class="anchor" href="#using-proxies--switches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using Proxies / Switches</h3>
 
-<p>TorrentBeamJS supports all standard Nightmare switches, which in turn means it supports all of Chromium's switches. </p>
-
-<p>Please read about the available switches here: <a href="https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches">https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches</a></p>
+<p>TorrentBeamJS supports all standard Nightmare switches, which in turn means it supports all of Chromium's switches. 
+Just pass your configuration object into the constructor of TorrentBeam.
+Please read about the available switches here: <a href="https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches">https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches</a></p>
 
 <h2>
 <a id="how-do-i-add-other-providers" class="anchor" href="#how-do-i-add-other-providers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How Do I Add Other Providers?</h2>
