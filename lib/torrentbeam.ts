@@ -3,9 +3,6 @@ import {IProviderConfig, INightmareSwitches, ISearchResults} from "./typings";
 
 const debug = require('debug')('torrentbeam');
 
-// Bluebird's Promise
-const bbPromise = require('bluebird');
-
 // Web driver(s)
 const Xray = require('x-ray');
 const nightmare = require('x-ray-nightmare');
@@ -27,6 +24,7 @@ export class TorrentBeam {
         this.providerConfigs = this.loadProviderConfig();
         this.providers = this.getLoadedProvidersNames();
         this.nightmareSwitches = nightmareSwitches || {switches: {}};
+        debug('Initialized.');
     }
 
 
@@ -39,6 +37,7 @@ export class TorrentBeam {
         for (let key in this.providerConfigs) {
             names.push(key);
         }
+        debug('Loaded %n provider names', names.length);
         return names;
     }
 
@@ -48,15 +47,17 @@ export class TorrentBeam {
      * @returns {Promise<ISearchResults[]>}
      */
     public async searchAll(searchTerm: string): Promise<ISearchResults[]> {
-        let results = [];
+        let results: Promise<ISearchResults>[] = [];
+        const all = Promise.all.bind(Promise);
         for (let i = 0; i < this.providers.length; i++) {
             // Parsed results from the search
             let currentProvider = this.getProviderConfigByName(this.providers[i]);
-            let singleResult = await this.doSearch(currentProvider, searchTerm);
+            debug('Got provider %s. Searching for %s', currentProvider.name, searchTerm);
+            let singleResult = this.doSearch(currentProvider, searchTerm);
             // Add it to the array of all site's results
             results.push(singleResult);
         }
-        return results;
+        return await all(results);
     }
 
     /**
@@ -65,12 +66,12 @@ export class TorrentBeam {
      * @param searchTerm - What we're searching for
      * @returns {Promise<ISearchResults>}
      */
-    public async searchSingle(provider: string, searchTerm: string): Promise<ISearchResults> {
+    public searchSingle(provider: string, searchTerm: string): Promise<ISearchResults> {
         if (!this.isValidProvider(provider)) {
             throw new Error('Invalid Provider Specified!');
         }
         let providerConf = this.getProviderConfigByName(provider);
-        return await this.doSearch(providerConf, searchTerm);
+        return this.doSearch(providerConf, searchTerm);
 
     }
 
@@ -99,43 +100,26 @@ export class TorrentBeam {
      * @param searchTerm
      * returns {Promise<ISearchResults>}
      */
-    private doSearch(provider: string|IProviderConfig, searchTerm: string): Promise<ISearchResults> {
-        return new bbPromise(
-            (resolve, reject) => {
-                let providerConf: IProviderConfig;
-                if ('string' === typeof provider) {
-                    providerConf = this.getProviderConfigByName(provider);
-                } else {
-                    providerConf = provider;
+    private async doSearch(provider: string|IProviderConfig, searchTerm: string): Promise<any> {
+        let providerConf: IProviderConfig;
+        if ('string' === typeof provider) {
+            providerConf = this.getProviderConfigByName(provider);
+        } else {
+            providerConf = provider;
+        }
+        // Use nightmare to handle providers where JS is required.
+        let nightmareDriver = nightmare(this.nightmareSwitches);
+        const x = Xray().driver(nightmareDriver);
+        // Create our absolute search URL.
+        let searchUrl = this.createSearchUrl(providerConf, searchTerm);
+        // Use bbPromise.promisify to translate callbacks to promises.
+        return new Promise((resolve, reject) => {
+            return x(searchUrl, providerConf.resultsCssSelectors)(function (err, resp) {
+                    if (err) reject(err);
+                    else resolve(resp);
                 }
-                console.log(providerConf);
-                // Use nightmare to handle providers where JS is required.
-                let nightmareDriver = nightmare(this.nightmareSwitches);
-                const x = Xray().driver(nightmareDriver);
-                // Create our absolute search URL.
-                let searchUrl = this.createSearchUrl(providerConf, searchTerm);
-                // Use bbPromise.promisify to translate callbacks to promises.
-                let search = bbPromise.promisify(x(searchUrl, providerConf.resultsCssSelectors));
-                // Handle success/failure of the searches
-                search().then(resp => {
-                    console.log('Resp received successfully.');
-                    // Calling this terminates the server
-                    nightmareDriver();
-                    // Resolve the successful search
-                    resolve({
-                        provider: providerConf.name,
-                        results: resp
-                    });
-                })
-                .catch(err => {
-                    console.error('Error!');
-                    console.error(err);
-                    // Calling this terminates the server
-                    nightmareDriver();
-                    // Reject the failed search
-                    reject(err);
-                });
-            });
+            );
+        });
     }
 
 
