@@ -38,7 +38,10 @@ As you can see this provides all the necessary information points as keys in the
 
 ### Performing Searches
 
+Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.
+
 #### All Provider Search
+
 ```javascript
     const TorrentBeam = require('TorrentBeam').TorrentBeam;
     let torrentBeam = new TorrentBeam();
@@ -50,7 +53,6 @@ As you can see this provides all the necessary information points as keys in the
 ```
 
 #### Single Provider Search
-Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.
 ```javascript
     const TorrentBeam = require('TorrentBeam').TorrentBeam;
     let torrentBeam = new TorrentBeam();
