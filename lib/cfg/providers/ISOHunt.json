@@ -1,0 +1,22 @@
+{
+  "name": "ISOHunt",
+  "searchUrl": "https://isohunt.to/torrents/?ihq=%s",
+  "testSearchUrl": "https://isohunt.to/torrents/?ihq=photoshop",
+  "resultsCssSelectors": {
+    "links": [
+      ".title-row span@href"
+    ],
+    "titles": [
+      ".title-row span"
+    ],
+    "added": [
+      ".date-row"
+    ],
+    "sizes": [
+      ".size-row"
+    ],
+    "seeds": [
+      "td.sn"
+    ]
+  }
+}

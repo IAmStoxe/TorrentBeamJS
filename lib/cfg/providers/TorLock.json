@@ -1,0 +1,22 @@
+{
+  "name": "TorLock",
+  "searchUrl": "https://www.torlock.com/all/torrents/%s.html",
+  "testSearchUrl": "https://www.torlock.com/all/torrents/batman.html",
+  "resultsCssSelectors": {
+    "links": [
+      ".panel-default .table-condensed td a@href"
+    ],
+    "titles": [
+      ".panel-default .table-condensed b"
+    ],
+    "added": [
+      ".panel-default .td"
+    ],
+    "sizes": [
+      ".panel-default .ts"
+    ],
+    "seeds": [
+      ".panel-default .tul"
+    ]
+  }
+}

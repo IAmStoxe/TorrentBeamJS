@@ -1,0 +1,22 @@
+{
+  "name": "LimeTorrents",
+  "searchUrl": "https://www.limetorrents.cc/search/all/%s/seeds/1/",
+  "testSearchUrl": "https://www.limetorrents.cc/search/all/Photoshop/seeds/1/",
+  "resultsCssSelectors": {
+    "links": [
+      "#content > table:nth-child(8) > tbody > tr > td.tdleft > div.tt-name > a:nth-child(2)@href"
+    ],
+    "titles": [
+      "#content > table:nth-child(8) > tbody > tr > td.tdleft > div.tt-name > a:nth-child(2)"
+    ],
+    "added": [
+      "#content > table:nth-child(8) > tbody > tr > td:nth-child(2)"
+    ],
+    "sizes": [
+      "#content > table:nth-child(8) > tbody > tr > td:nth-child(3)"
+    ],
+    "seeds": [
+      "#content > table:nth-child(8) > tbody > tr > td:nth-child(4)"
+    ]
+  }
+}

@@ -10,7 +10,8 @@ The premise is very simple. Most torrent websites provide a search function. The
 
 It works from a JSON file, namely search_config.json. Within this magical JSON file is an array of configuration objects for the individual providers. Here is the provided configuration of TorLock:
 
-	  {
+```json
+    {
 		"name": "TorLock",
 		"searchUrl": "https://www.torlock.com/all/torrents/%s.html",
 		"testSearchUrl": "https://www.torlock.com/all/torrents/batman.html",
@@ -31,13 +32,28 @@ It works from a JSON file, namely search_config.json. Within this magical JSON f
 			".panel-default .tul"
 		  ]
 		}
-	  }
-
+	}
+```
 As you can see this provides all the necessary information points as keys in the config, with their accompanying value of their CSS selector for that specific website. These should be pretty self explanatory.
+
+### Performing Searches
+
+#### Single Provider Search
+Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.
+```javascript
+    const TorrentBeam = require('TorrentBeam').TorrentBeam;
+    let torrentBeam = new TorrentBeam();
+    let searchTerm = 'IAmSearchingForThis';
+    let provider = 'LimeTorrents';
+    
+    torrentBeam.searchSingle(provider,searchTerm)
+        .then(resp => console.log(resp))
+        .catch(err => console.error(err));
+```
 
 ### Using Proxies / Switches
 TorrentBeamJS supports all standard Nightmare switches, which in turn means it supports all of Chromium's switches. 
-
+Just pass your configuration object into the constructor of TorrentBeam.
 Please read about the available switches here: <https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches>
 
 

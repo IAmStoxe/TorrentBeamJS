@@ -1,0 +1,22 @@
+{
+  "name": "Zooqle",
+  "searchUrl": "https://zooqle.com/search?q=%s",
+  "testSearchUrl": "https://zooqle.com/search?q=batman",
+  "resultsCssSelectors": {
+    "links": [
+      "td.text-trunc.text-nowrap > a.small@href"
+    ],
+    "titles": [
+      "td.text-trunc.text-nowrap > a.small"
+    ],
+    "added": [
+      "td.text-nowrap.text-muted.smaller"
+    ],
+    "sizes": [
+      "div.progress-bar.prog-blue.prog-l"
+    ],
+    "seeds": [
+      "div.progress-bar.smaller.prog-green.prog-l"
+    ]
+  }
+}
