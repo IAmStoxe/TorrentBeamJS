@@ -38,11 +38,11 @@ As you can see this provides all the necessary information points as keys in the
 
 ### Performing Searches
 
-Everything returns a Promise, so we can keep out code cleaner, and safe from callback hell.
+Everything returns a Promise, so we can keep our code cleaner, and safe from callback hell.
 
 #### All Provider Search
 
-```javascript
+```typescript
     const TorrentBeam = require('TorrentBeam').TorrentBeam;
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
@@ -53,7 +53,7 @@ Everything returns a Promise, so we can keep out code cleaner, and safe from cal
 ```
 
 #### Single Provider Search
-```javascript
+```typescript
     const TorrentBeam = require('TorrentBeam').TorrentBeam;
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
@@ -62,6 +62,17 @@ Everything returns a Promise, so we can keep out code cleaner, and safe from cal
     torrentBeam.searchSingle(provider,searchTerm)
         .then(resp => console.log(resp))
         .catch(err => console.error(err));
+```
+
+#### Without .then().catch()
+```typescript
+const TorrentBeam = require('TorrentBeam').TorrentBeam;
+let torrentBeam = new TorrentBeam();
+let searchTerm = 'IAmSearchingForThis';
+
+async function awaitSearchResults() {
+    return await torrentBeam.searchAll(searchTerm);
+}
 ```
 
 ### Using Proxies / Switches
