@@ -13,6 +13,17 @@ export interface ISearchResultsSelectors {
     seeds: string,
 }
 
+export interface ISearchResults {
+    provider: string,
+    results: {
+        links: string,
+        titles: string,
+        added: string,
+        size: string,
+        seeds: string,
+    }
+}
+
 export interface INightmareSwitches {
     switches: {}
 }

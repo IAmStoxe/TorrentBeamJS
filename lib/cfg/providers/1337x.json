@@ -1,0 +1,22 @@
+{
+  "name": "1337x",
+  "searchUrl": "http://www.1337x.to/search/%s/1/",
+  "testSearchUrl": "http://www.1337x.to/search/photoshop/1/",
+  "resultsCssSelectors": {
+    "links": [
+      "td.name > a:nth-of-type(2)@href"
+    ],
+    "titles": [
+      "td.name > a:nth-of-type(2)"
+    ],
+    "added": [
+      "td.coll-date"
+    ],
+    "sizes": [
+      ".coll-4.size.mob-uploader"
+    ],
+    "seeds": [
+      ".coll-2.seeds"
+    ]
+  }
+}
