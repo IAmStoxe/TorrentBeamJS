@@ -14,7 +14,7 @@ const config = require('./cfg/config');
 const util = require('util');
 const path = require('path');
 
-export class TorrentBeam {
+export default class TorrentBeam {
 
     public providerConfigs: IProviderConfig[];
     public providers: string[];
