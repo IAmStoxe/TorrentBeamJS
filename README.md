@@ -66,8 +66,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 
 #### Without .then().catch()
 ```typescript
-const TorrentBeam = require('TorrentBeam');
-let torrentBeam = new TorrentBeam();
+import {TorrentBeam} from 'TorrentBeam';
 let searchTerm = 'IAmSearchingForThis';
 
 async function awaitSearchResults() {
