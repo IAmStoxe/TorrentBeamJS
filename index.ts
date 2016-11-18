@@ -1,3 +1,3 @@
-import * as TorrentBeam from "./lib/torrentbeam";
+import {TorrentBeam} from "./lib/torrentbeam";
 
-export default {TorrentBeam}
+export {TorrentBeam};
