@@ -43,7 +43,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 #### All Provider Search
 
 ```typescript
-    const TorrentBeam = require('TorrentBeam');
+    import {TorrentBeam} from 'TorrentBeam';
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
     
@@ -54,7 +54,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 
 #### Single Provider Search
 ```typescript
-    const TorrentBeam = require('TorrentBeam');
+    import {TorrentBeam} from 'TorrentBeam';
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
     let provider = 'LimeTorrents';
