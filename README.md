@@ -43,7 +43,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 #### All Provider Search
 
 ```typescript
-    const TorrentBeam = require('TorrentBeam').TorrentBeam;
+    const TorrentBeam = require('TorrentBeam');
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
     
@@ -54,7 +54,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 
 #### Single Provider Search
 ```typescript
-    const TorrentBeam = require('TorrentBeam').TorrentBeam;
+    const TorrentBeam = require('TorrentBeam');
     let torrentBeam = new TorrentBeam();
     let searchTerm = 'IAmSearchingForThis';
     let provider = 'LimeTorrents';
@@ -66,7 +66,7 @@ Everything returns a Promise, so we can keep our code cleaner, and safe from cal
 
 #### Without .then().catch()
 ```typescript
-const TorrentBeam = require('TorrentBeam').TorrentBeam;
+const TorrentBeam = require('TorrentBeam');
 let torrentBeam = new TorrentBeam();
 let searchTerm = 'IAmSearchingForThis';
 
@@ -78,9 +78,24 @@ async function awaitSearchResults() {
 ### Using Proxies / Switches
 TorrentBeamJS supports all standard Nightmare switches, which in turn means it supports all of Chromium's switches. 
 Just pass your configuration object into the constructor of TorrentBeam.
-Please read about the available switches here: <https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches>
+Please read about the [available switches here](https://github.com/segmentio/nightmare/blob/a5e658bf04815bb2c3340fd05d34e2d158f6c7e6/Readme.md#switches)
 
 
 ## How Do I Add Other Providers?
 
-Request it as an issue, or you can use a tool like SelectorGadget (<http://selectorgadget.com/>). They have an awesome free Chrome extension.
+Request it as an issue, or you can use a tool like [SelectorGadget](http://selectorgadget.com/). They have an awesome free Chrome extension.
+
+## License / Disclaimer
+[GNU General Public License v3 (GPL-3)](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)#summary)
+### Text Summary
+>You may copy, distribute and modify the software as long as you track changes/dates in source files. Any modifications to or software including (via compiler) GPL-licensed code must also be made available under the GPL along with build & install instructions.
+
+A full copy of the GNU license under which this software is partially released is [available here](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)#fulltext)
+
+##### In addition to the GNU license:
+* This work is provided as is with no guarantee or warranty whether explicit or implied.
+* You may not utilize this software to illegally obtain copies of software, music, movies, and/or any other media.
+* Any actions conducted whether directly or indirectly while utilizing this software are the sole, full responsbility of the end-user.
+
+#### In The Event I Have Not Been 100% Clear And Understood
+What you do with this software is your responsibility. I will not be held liable for any damages caused by you, or your use of this software. Be sure to check your local laws and regulations before use.
