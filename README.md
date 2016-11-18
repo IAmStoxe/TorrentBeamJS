@@ -8,7 +8,7 @@ After the shutdown of KAT (KickAssTorrents) it has been harder and harder to fin
 
 The premise is very simple. Most torrent websites provide a search function. The application emulates a browser (utilizing Nightmare (<https://www.npmjs.com/package/nightmare>)) to bypass straight HTTP request "securities" put in place by these websites, such as JavaScript rendering.
 
-It works from a JSON file, namely search_config.json. Within this magical JSON file is an array of configuration objects for the individual providers. Here is the provided configuration of TorLock:
+It works from a series of JSON files located in lib/cfg/providers/. Within these magical JSON files are configuration objects for the individual providers. Here is the provided configuration of TorLock:
 
 ```json
     {
